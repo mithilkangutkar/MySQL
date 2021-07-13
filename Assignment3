@@ -1,0 +1,18 @@
+
+1) Creating procedure to find order status by month and year
+create procedure order_status(in month int,year int)
+begin
+select orderDate,status from orders
+where month(orderDate) = month
+and year(orderDate) = year ;
+end /
+delimiter ;
+
+call order_status(3,2003);
+
+2) 
+a) Creating a table called cancellations
+create table cancellations(id int primary key,customernumber int , ordernumber int,constraint FK_custno foreign key(customernumber) references orders(customernumber),
+constraint FK_ordno foreign key(ordernumber) references orders(ordernumber) );
+
+b) 
