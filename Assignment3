@@ -15,4 +15,35 @@ a) Creating a table called cancellations
 create table cancellations(id int primary key,customernumber int , ordernumber int,constraint FK_custno foreign key(customernumber) references orders(customernumber),
 constraint FK_ordno foreign key(ordernumber) references orders(ordernumber) );
 
-b) 
+b) create trigger tr_cancellation
+after update on orders 
+for each row
+begin
+if new.status = "cancelled" then
+insert into cancellations(customernumber,ordernumber) values 
+(old.customerNumber,old.orderNumber);
+end if;
+end	/
+
+3)
+a) CREATE PROCEDURE sp_customer_lvl(
+    IN  cust_no INT, 
+    OUT cust_level  VARCHAR(20))
+BEGIN
+    DECLARE credit DECIMAL DEFAULT 0;
+
+    SELECT amount
+    INTO credit
+    FROM payments
+    WHERE customerNumber = cust_no;
+
+    IF credit > 50000 THEN
+        SET cust_level = 'PLATINUM';
+    ELSEIF credit <= 50000 AND credit > 10000 THEN
+        SET cust_level = 'GOLD';
+    ELSE
+        SET cust_level = 'SILVER';
+    END IF;
+END /
+
+b)
