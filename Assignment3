@@ -46,4 +46,7 @@ BEGIN
     END IF;
 END /
 
-b)
+b) select customerNumber,customerName,if(creditLimit > 50000 , "PLATINUM",if(creditLimit <= 50000 and creditLimit > 25000 , "GOLD","SILVER")) as purchase_status from customers;
+
+4)
+
