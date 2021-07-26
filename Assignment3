@@ -1,3 +1,4 @@
+Assignments3
 
 1) Creating procedure to find order status by month and year
 create procedure order_status(in month int,year int)
@@ -39,7 +40,7 @@ BEGIN
 
     IF credit > 50000 THEN
         SET cust_level = 'PLATINUM';
-    ELSEIF credit <= 50000 AND credit > 10000 THEN
+    ELSEIF credit <= 50000 AND credit > 25000 THEN
         SET cust_level = 'GOLD';
     ELSE
         SET cust_level = 'SILVER';
@@ -49,4 +50,5 @@ END /
 b) select customerNumber,customerName,if(creditLimit > 50000 , "PLATINUM",if(creditLimit <= 50000 and creditLimit > 25000 , "GOLD","SILVER")) as purchase_status from customers;
 
 4)
+
 
