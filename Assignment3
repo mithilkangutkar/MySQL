@@ -51,4 +51,31 @@ b) select customerNumber,customerName,if(creditLimit > 50000 , "PLATINUM",if(cre
 
 4)
 
+create procedure (cust_no int) 
+begin 
+
+declare exp as exception;
+declare pur_status varchar(255);
+declare cred_limit int; 
+
+select purchase_status,creditlimit into pur_status,cred_limit from customers
+where purchase_status = pur_status 
+and creditLimit = cred_limit; 
+
+if pur_status = 'PLATINUM' and creditLimit < 100000
+then 
+raise exp; 
+end if;
+
+when exp then dbms.output.put_line('update creditLimit to 100000');
+
+end ;
+
+Note: Was unable to sucesdduflly create a proper syntax. But this is the technique i followed for execution. 
+
+5)
+
+
+
+
 
