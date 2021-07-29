@@ -71,9 +71,25 @@ when exp then dbms.output.put_line('update creditLimit to 100000');
 
 end ;
 
-Note: Was unable to sucesdduflly create a proper syntax. But this is the technique i followed for execution. 
+Note: Was unable to successflly create a proper syntax. But this is the technique I followed for execution. 
 
-5)
+5) on update & on delete cascade using triggers
+
+create trigger on_delete_cascade
+after delete on movies 
+for each row 
+begin 
+delete from rentals where movieid = old.id;
+end;
+
+create trigger on_update_cascade 
+before update 
+on movies
+for each row
+begin
+update rentals set movieid = new.id 
+where movieid = old.id;
+end;
 
 
 
